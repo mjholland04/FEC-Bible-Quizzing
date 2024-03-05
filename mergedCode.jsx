@@ -1,25 +1,70 @@
 import React, { useState, useEffect } from 'react';
 
-let teamA = {
-    name: "Grace Morton",
-    score: 0,
-    timeouts: 0
-};
+var currentQuizzer;
+// let currentQuizzer = {
+//     firstName: "",
+//     lastName: "",
+//     church: "",
+//     league: "",
+//     teamName: "",
+//     quizoffPoints: 0
+// };
 
-let teamB = {
-    name: "UCC",
-    score: 0,
-    timeouts: 0
-};
+let TeamA = {};
+TeamA["score"] = 180;
+TeamA["timeouts"] = 3;
+TeamA["fouls"] = 2;
+TeamA["players"] = [player1, player2, player3, player4];
+TeamA["teamName"] = "UPLAND 1";
+TeamA["league"] = "hs";
+TeamA["church"] = "Upland Community Church";
 
-let currentQuizzer = {
-    firstName: "",
-    lastName: "",
-    church: "",
-    league: "",
-    teamName: "",
-    quizoffPoints: 0
-};
+let player1 = {};
+player1["name"] = "Jada Bonnett";
+player1["personalScore"] = 100;
+player1["personalFouls"] = 0;
+player1["correctAnswers"] = 5; 
+
+let player2 = {};
+player2["name"] = "Ashley Moore";
+player2["personalScore"] = 20;
+player2["personalFouls"] = 0;
+player2["correctAnswers"] = 1; 
+
+let player3 = {};
+player3["name"] = "Mason Holland";
+player3["personalScore"] = 40;
+player3["personalFouls"] = 2;
+player3["correctAnswers"] = 2; 
+
+let player4 = {};
+player4["name"] = "Ellie Stamper";
+player4["personalScore"] = 20;
+player4["personalFouls"] = 0;
+player4["correctAnswers"] = 1; 
+
+let TeamB = {};
+TeamB["score"] = 80;
+TeamB["timeouts"] = 2;
+TeamB["fouls"] = 4;
+TeamB["players"] = [player5, player6];
+TeamB["teamName"] = "upland 2";
+TeamB["league"] = "ms";
+TeamB["church"] = "Taylor University Chapel";
+
+let player5 = {};
+player5["name"] = "D Mike";
+player5["personalScore"] = 40;
+player5["personalFouls"] = 3;
+player5["correctAnswers"] = 2; 
+
+let player6 = {};
+player6["name"] = "Greg Dyson";
+player6["personalScore"] = 40;
+player6["personalFouls"] = 1;
+player6["correctAnswers"] = 2; 
+
+
 
 function QuizMatch() {
     const [teamAFouls, setTeamAFouls] = useState(0);
@@ -71,10 +116,14 @@ function QuizMatch() {
     // Function to handle correct answer button clicks
     function handleCorrectButtonClick(team) {
         if (team === 'A') {
-            teamAPoints += 20; // Increment score for Team A
+            TeamA.score += 20; // Increment score for Team A
+            currentQuizzer.score +=20
+            currentQuizzer.correctAnswers +=1
             document.getElementById('teamAScore').textContent = `Total Score for Team A: ${teamAPoints}`;
         } else {
-            teamBPoints += 20; // Increment score for Team B
+            TeamB.score += 20; // Increment score for Team B
+            currentQuizzer.score +=20
+            currentQuizzer.correctAnswers +=1
             document.getElementById('teamBScore').textContent = `Total Score for Team B: ${teamBPoints}`;
         }
     }
@@ -82,10 +131,12 @@ function QuizMatch() {
     // Function to handle incorrect answer button clicks
     function handleIncorrectButtonClick(team) {
         if (team === 'A') {
-            teamAPoints -= 10; // Decrement score for Team A
+            TeamA.score -= 10; // Decrement score for Team A
+            currentQuizzer.score -= 10
             document.getElementById('teamAScore').textContent = `Total Score for Team A: ${teamAPoints}`;
         } else {
-            teamBPoints -= 10; // Decrement score for Team B
+            TeamB.score -= 10; // Decrement score for Team B
+            currentQuizzer.score -= 10
             document.getElementById('teamBScore').textContent = `Total Score for Team B: ${teamBPoints}`;
         }
     }
@@ -93,10 +144,14 @@ function QuizMatch() {
     // Function to handle bonus answer button clicks
     function handleBonusButtonClick(team) {
         if (team === 'A') {
-            teamAPoints += 10; // Increment score for Team A
+            TeamA.score += 10; // Increment score for Team A
+            currentQuizzer.score += 10
+            currentQuizzer.correctAnswers +=1 //QUESTION Does a bonus count towards student quizzing out?
             document.getElementById('teamAScore').textContent = `Total Score for Team A: ${teamAPoints}`;
         } else {
-            teamBPoints += 10; // Increment score for Team B
+            TeamB.score += 10; // Increment score for Team B
+            currentQuizzer.score += 10
+            currentQuizzer.correctAnswers += 1
             document.getElementById('teamBScore').textContent = `Total Score for Team B: ${teamBPoints}`;
         }
     }
