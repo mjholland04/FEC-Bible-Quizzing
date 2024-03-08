@@ -7,12 +7,21 @@ label {
   label {
     margin-top: 1rem;
   }
-
+input{
+    background-color: lightgray;
+    outline: none;
+    border:none;
+    height:25px;
+    width:150px;
+}
+label {
+    margin-right:8%;
+}
 .loginp {
 
     align-items: center;
     text-align: center;
-    font-size: large;
+    font-size: 25px;
 }
 
 .login {
@@ -22,7 +31,10 @@ label {
 }
 
 .regandloginbutton {
-    background-color: grey;
+    background-color: lightgray;
+    height: 35px;
+    width: 75px;
+    top: 0%;
 }
 
 .logolocation {
@@ -36,7 +48,9 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: white;
+    border-bottom: 1px solid black;
+
   }
   
   li {
@@ -45,7 +59,7 @@ ul {
   
   li a {
     display: block;
-    color: white;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -53,5 +67,24 @@ ul {
   }
   
   li a:hover {
-    background-color: #111;
+    background-color: lightgray;
+  }
+
+  .forgotpass {
+    text-decoration: underline;
+    font-size: small;
+    margin-left: 5%;
+    margin-top: 1px;
+    margin-bottom: 0px;
+  }
+  
+  .logowords{
+    font-size: 50px;
+    width:auto;
+    margin-left: 155px ;
+  }
+  .logo {
+    width:150px;
+    margin-top: 10%;
+    margin-bottom: 10%;
   }
