@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
 
-var currentQuizzer;
-
-
 function Player(n, ps, pf, ca){
   this.name = n;
   this.personalScore = ps;
@@ -17,8 +14,7 @@ let player3 = new Player("Mason", 40, 2, 2);
 let player4 = new Player("Ellie", 20, 0, 1);
 let player5 = new Player("DMike", 40, 3, 2);
 let player6 = new Player("Dyson", 40, 1, 2);
-currentQuizzer = player1;
-
+let currentQuizzer = player1;
 
 function Team(s, t, f, p, n, l, c){
   this.score = s;
@@ -31,8 +27,8 @@ function Team(s, t, f, p, n, l, c){
 }
 
 let teamA = new Team(180, 3,2,[player1, player2, player3, player4],"Upland 1","HS","UCC");
-console.log(teamA);
 let teamB = new Team(80,2,4,[player5, player6],"Upland 2","MS","Taylor Chapel");
+console.log(teamA);
 
 export function QuizMatch() {
   const [teamAFouls, setTeamAFouls] = useState(0);
@@ -70,6 +66,7 @@ export function handleFoulButtonClick(team) {
   } else {
     team.fouls += 1;
     if (team.fouls % 3 === 0) {
+      //create an alert?
       team.score -= 10;
       document.getElementById(
         "teamBScore"
@@ -98,7 +95,7 @@ export function handleCorrectButtonClick(team) {
 }
 
 // Function to handle incorrect answer button clicks
-export function handleIncorrectButtonClick(team) {
+export function handleIncorrectButtonClick(team) { //is there a rule for if the team gets so many answers wrong?
   if (team === teamA) {
     team.score -= 10;
     currentQuizzer.personalScore -= 10;
@@ -118,19 +115,14 @@ export function handleIncorrectButtonClick(team) {
 export function handleBonusButtonClick(team) {
   if (team === teamA) {
     team.score += 10;
-    currentQuizzer.personalScore += 10;
-    currentQuizzer.correctAnswers += 1; //QUESTION Does a bonus count towards student quizzing out?
-    console.log("player 1 score now:"+ currentQuizzer.personalScore)
     console.log(team)
-    //setScore(team.score)
-  //}
+  //   QuizMatch.setScore(team.score)
+  // }
     document.getElementById(
       "teamAScore"
     ).textContent = `Total Score for Team A: ${QuizMatch.teamAPoints}`;
   } else {
     team.score += 10;
-    currentQuizzer.personalScore += 10;
-    currentQuizzer.correctAnswers += 1;
     document.getElementById(
       "teamBScore"
     ).textContent = `Total Score for Team B: ${QuizMatch.teamBPoints}`;
