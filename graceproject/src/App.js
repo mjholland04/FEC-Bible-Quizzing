@@ -28,151 +28,143 @@ function Team(s, t, f, p, n, l, c){
 
 let teamA = new Team(180, 3,2,[player1, player2, player3, player4],"Upland 1","HS","UCC");
 let teamB = new Team(80,2,4,[player5, player6],"Upland 2","MS","Taylor Chapel");
-console.log(teamA);
-
-export function QuizMatch() {
-  const [teamAFouls, setTeamAFouls] = useState(0);
-  const [teamBFouls, setTeamBFouls] = useState(0);
-  const [teamAPoints, setTeamAPoints] = useState(0);
-  const [teamBPoints, setTeamBPoints] = useState(0);
-  const [teamATimeouts] = useState(0);
-  const [teamBTimeouts] = useState(0);
-  const [teamAStudentFouls, setTeamAStudentFouls] = useState([0, 0, 0, 0]);
-  const [teamBStudentFouls, setTeamBStudentFouls] = useState([0, 0, 0, 0]);
-}
-// Function to detect fouls
-export function detectFouls(team) {
-  if (team === teamA) {
-    QuizMatch.setTeamAFouls((prevFouls) => prevFouls + 1);
-    teamA.fouls += 1;
-    // Additional logic for Team A fouls...
-  } else{
-    QuizMatch.setTeamBFouls((prevFouls) => prevFouls + 1);
-    teamB.fouls += 1;
-    // Additional logic for Team B fouls...
-  }
-}
-
-// Function to handle foul button clicks
-export function handleFoulButtonClick(team) {
-  if (team === teamA) {
-    team.fouls += 1;
-    if (teamA.fouls % 3 === 0) {
-      team.score -= 10; 
-      document.getElementById(
-        "teamAScore"
-      ).textContent = `Total Score for Team A: ${team.score}`;
-    }
-  } else {
-    team.fouls += 1;
-    if (team.fouls % 3 === 0) {
-      //create an alert?
-      team.score -= 10;
-      document.getElementById(
-        "teamBScore"
-      ).textContent = `Total Score for Team B: ${team.score}`;
-    }
-  }
-}
-
-// Function to handle correct answer button clicks
-export function handleCorrectButtonClick(team) {
-  if (team === teamA) {
-    team.score += 20;
-    currentQuizzer.personalScore += 20;
-    currentQuizzer.correctAnswers += 1;
-    document.getElementById(
-      "teamAScore"
-    ).textContent = `Total Score for Team A: ${team.score}`;
-  } else {
-    team.score += 20;
-    currentQuizzer.personalScore += 20;
-    currentQuizzer.correctAnswers += 1;
-    document.getElementById(
-      "teamBScore"
-    ).textContent = `Total Score for Team B: ${team.score}`;
-  }
-}
-
-// Function to handle incorrect answer button clicks
-export function handleIncorrectButtonClick(team) { //is there a rule for if the team gets so many answers wrong?
-  if (team === teamA) {
-    team.score -= 10;
-    currentQuizzer.personalScore -= 10;
-    document.getElementById(
-      "teamAScore"
-    ).textContent = `Total Score for Team A: ${team.score}`;
-  } else {
-    team.score -= 10;
-    currentQuizzer.personalScore -= 10;
-    document.getElementById(
-      "teamBScore"
-    ).textContent = `Total Score for Team B: ${team.score}`;
-  }
-}
-
-// Function to handle bonus answer button clicks
-export function handleBonusButtonClick(team) {
-  if (team === teamA) {
-    team.score += 10;
-    console.log(team)
-  //   QuizMatch.setScore(team.score)
-  // }
-    document.getElementById(
-      "teamAScore"
-    ).textContent = `Total Score for Team A: ${QuizMatch.teamAPoints}`;
-  } else {
-    team.score += 10;
-    document.getElementById(
-      "teamBScore"
-    ).textContent = `Total Score for Team B: ${QuizMatch.teamBPoints}`;
-  }
-}
-
-// Function to handle timeout button clicks
-export function handleTimeoutButtonClick(team) {
-  team.timeouts += 1;
-  if (team === teamA){
-    document.getElementById(
-      "teamATimeouts"
-    ).textContent = `Timeouts for Team A: ${QuizMatch.teamATimeouts}`;
-  }else{
-    document.getElementById(
-      "teamBTimeouts"
-    ).textContent = `Timeouts for Team B: ${QuizMatch.teamBTimeouts}`;
-  }
-}
 
 const TeamScoreboard = ({ teamName }) => {
-  const [score, setScore] = useState(0);
-  const [foulCount, setFoulCount] = useState(0);
+  const [teamAScore, setTeamAScore] = useState(teamA.score);
+  const [teamAFouls, setTeamAFoulCount] = useState(teamA.fouls);
+  const [teamBScore, setTeamBScore] = useState(teamB.score);
+  const [teamBFouls, setTeamBFoulCount] = useState(teamA.fouls);
 
-  const handleScoreChange = (value) => {
-    setScore(score + value);
-  };
+  // const handleScoreChange = (value) => {
+  //   setTeamAScore(teamAScore + value);
+  // };
 
+  function detectFouls(team) {
+    if (team === teamA) {
+      teamA.fouls += 1;
+      setTeamAFoulCount(team.fouls)
+      // Additional logic for Team A fouls...
+    } else{
+      teamB.fouls += 1;
+      setTeamBFoulCount(team.fouls)
+      // Additional logic for Team B fouls...
+    }
+  }
+  
+  // Function to handle foul button clicks
+  function handleFoulButtonClick(team) {
+    if (team === teamA) {
+      team.fouls += 1;
+      setTeamAFoulCount(team.fouls)
+      if (teamA.fouls % 3 === 0) {
+        team.score -= 10; 
+        setTeamAScore(team.score)
+      }
+    } else {
+      team.fouls += 1;
+      setTeamBFoulCount(team.fouls)
+      if (team.fouls % 3 === 0) {
+        //create an alert?
+        team.score -= 10;
+        setTeamBScore(team.score)
+      }
+    }
+  }
+  
+  // Function to handle correct answer button clicks
+  function handleCorrectButtonClick(team) {
+    if (team === teamA) {
+      team.score += 20;
+      currentQuizzer.personalScore += 20;
+      currentQuizzer.correctAnswers += 1;
+      setTeamAScore(team.score)
+    } else {
+      team.score += 20;
+      currentQuizzer.personalScore += 20;
+      currentQuizzer.correctAnswers += 1;
+      setTeamBScore(team.score)
+    }
+  }
+  
+  // Function to handle incorrect answer button clicks
+  function handleIncorrectButtonClick(team) { //is there a rule for if the team gets so many answers wrong?
+    if (team === teamA) {
+      team.score -= 10;
+      currentQuizzer.personalScore -= 10;
+      setTeamAScore(team.score)
+    } else {
+      team.score -= 10;
+      currentQuizzer.personalScore -= 10;
+      setTeamBScore(team.score)
+    }
+  }
+  
+  // Function to handle bonus answer button clicks
+  function handleBonusButtonClick(team) {
+    if (team === teamA) {
+      team.score += 10;
+      setTeamAScore(team.score)
+    } else {
+      team.score += 10;
+      setTeamBScore(team.score)
+    }
+  }
+
+  function handleNeg20(team){
+    if (team === teamA){
+      teamA.score -= 20;
+      setTeamAScore(team.score)
+    }else{
+      teamB.score -= 20
+      setTeamBScore(team.score)
+    }
+  }
+  
+  // Function to handle timeout button clicks
+  function handleTimeoutButtonClick(team) {
+    team.timeouts += 1;
+    // if (team === teamA){
+    //   document.getElementById(
+    //     "teamATimeouts"
+    //   ).textContent = `Timeouts for Team A: ${QuizMatch.teamATimeouts}`;
+    // }else{
+    //   document.getElementById(
+    //     "teamBTimeouts"
+    //   ).textContent = `Timeouts for Team B: ${QuizMatch.teamBTimeouts}`;
+    // }
+  }
   // const handleFoul = () => {
   //   setFoulCount(foulCount + 1);
   // };
 
   return (
     <div>
-      <h2>{teamName} Score: {score}</h2>
+      <h2>{teamA.teamName} Score: {teamAScore}</h2>
       <button onClick={() => handleBonusButtonClick(teamA)}>+10</button>
       <button onClick={() => handleIncorrectButtonClick(teamA)}>-10</button>
       <button onClick={() => handleCorrectButtonClick(teamA)}>+20</button>
-      <button onClick={() => handleFoulButtonClick(teamA)}>-20</button>
-      {/* <button onClick={handleFoul}>Foul</button> */}
-      <p>Foul Count: {foulCount}</p>
+      <button onClick={() => handleNeg20(teamA)}>-20</button>
+      <button onClick={() => handleFoulButtonClick(teamA)}>Foul</button>
+      <p>Foul Count: {teamAFouls}</p>
+      
+      <h2>{teamB.teamName} Score: {teamBScore}</h2>
+      <button onClick={() => handleBonusButtonClick(teamB)}>+10</button>
+      <button onClick={() => handleIncorrectButtonClick(teamB)}>-10</button>
+      <button onClick={() => handleCorrectButtonClick(teamB)}>+20</button>
+      <button onClick={() => handleNeg20(teamA)}>-20</button>
+      <button onClick={() => handleFoulButtonClick(teamB)}>Foul</button>
+      <p>Foul Count: {teamBFouls}</p>
     </div>
+    
+    
   );
 };
 
 const App = () => {
   return (
     <div>
-      <TeamScoreboard teamName={teamA.teamName} />
-      <TeamScoreboard teamName={teamB.teamName} />
+      <TeamScoreboard teamName={teamA} />
+      {/* <TeamScoreboard teamName={teamB.teamName} /> */}
     </div>
   );
 };
