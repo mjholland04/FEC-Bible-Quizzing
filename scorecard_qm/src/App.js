@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './QMScorecard.css';
+import './App.css';
 import QuestionCounter from './QuestionCounter';
 import RowLabels from './ScorecardRowLabels';
 import ScorecardScroll from './ScorecardScroll';

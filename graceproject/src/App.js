@@ -38,7 +38,7 @@ function setListA(players){
   let dropdown = document.getElementById("TeamAPlayers");
   var opt = document.createElement("option"); 
   opt.text = players.name;
-  opt.value = players.id; //values have to be strings... not sure what to do about that yet trying to get the correct player when chosen to attribute points
+  opt.value = players; //values have to be strings... not sure what to do about that yet trying to get the correct player when chosen to attribute points
   //may have to wait to make those changes until we are not using a dropdown.
   dropdown.options.add(opt);
 }
@@ -81,6 +81,7 @@ const TeamScoreboard = () => {
   
   // Function to handle correct answer button clicks
   function handleCorrectButtonClick(team) {
+    //getCurrentPlayer(team)
     if (team === teamA) {
       team.score += 20;
       currentQuizzer.personalScore += 20;
