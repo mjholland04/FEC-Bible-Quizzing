@@ -5,8 +5,10 @@ import RowLabels from './ScorecardRowLabels';
 import ScorecardScroll from './ScorecardScroll';
 import ScorecardColumn from './ScorecardColumn';
 import ScrollingTable from './ScorecardScroll';
+import './setup.js'
 
 function App() {
+   
   return (
     <div className="App">
 
@@ -18,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+ export default App;
