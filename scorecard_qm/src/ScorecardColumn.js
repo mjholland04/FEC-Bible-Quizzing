@@ -1,7 +1,5 @@
-//import React from 'react';
 import React, { useState } from "react";
 import "./App.css";
-//import { setup, teamA, teamB, setListA, currentQuizzer, player1 } from "./setup.js";
 import * as S from "./setup.js";
 import { setListA } from "./setup.js";
 
@@ -35,16 +33,16 @@ export function ScorecardColumn() {
   }
 
   function handlePoints(team) {
-    console.log(currentQuizzer)
+    updatePlayer(team)
     let val = document.getElementById("pointsDropdown").value;
     console.log(team.score)
     if (val == "+10") {
       team.score += 10;
-      console.log("fine2")
     } else if (val == "+20") {
       team.score += 20;
       currentQuizzer.personalScore += 20;
       currentQuizzer.correctAnswers += 1;
+      console.log(currentQuizzer)
     } else if (val == "-10") {
       //is there a rule for if the team gets so many answers wrong?
       team.score -= 10;
@@ -59,7 +57,6 @@ export function ScorecardColumn() {
     }
     console.log(team.score)
   }
-
 
   // Function to handle timeout button clicks
   function handleTimeoutButtonClick(team) {
@@ -80,14 +77,13 @@ export function ScorecardColumn() {
     }
   }
 
-  function getCurrentPlayer(team) {
+  function updatePlayer(team) {
     if (team === S.teamA) {
       var selector = document.getElementById("TeamAPlayers");
-      currentQuizzer = selector.value;
-      console.log(currentQuizzer);
+      currentQuizzer = team.players.find((obj) => obj.name === selector.value)
     } else {
       var selector = document.getElementById("TeamBPlayers");
-      currentQuizzer = selector.value;
+      currentQuizzer = team.players.find((obj) => obj.name === selector.value)
     }
   }
   return (
