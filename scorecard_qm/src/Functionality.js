@@ -6,22 +6,22 @@ import "./App.css";
 // - finish making the scores be attrubuted to the selected player
 // - 
 
-function Player(name, personalScore, personalFouls, correctAnswers){
+export function Player(name, personalScore, personalFouls, correctAnswers){
   this.name = name;
   this.personalScore = personalScore;
   this.personalFouls = personalFouls;
   this.correctAnswers = correctAnswers
 }
 
-let player1 = new Player("Jada", 100, 0, 5);
-let player2 = new Player("Ashley", 20, 0, 1);
-let player3 = new Player("Mason", 40, 2, 2);
-let player4 = new Player("Ellie", 20, 0, 1);
-let player5 = new Player("DMike", 40, 3, 2);
-let player6 = new Player("Dyson", 40, 1, 2);
-let currentQuizzer = player1;
+export let player1 = new Player("Jada", 100, 0, 5);
+export let player2 = new Player("Ashley", 20, 0, 1);
+export let player3 = new Player("Mason", 40, 2, 2);
+export let player4 = new Player("Ellie", 20, 0, 1);
+export let player5 = new Player("DMike", 40, 3, 2);
+export let player6 = new Player("Dyson", 40, 1, 2);
+export let currentQuizzer = player1;
 
-function Team(score, timeouts, fouls, players, teamName, league, church){
+export function Team(score, timeouts, fouls, players, teamName, league, church){
   this.score = score;
   this.timeouts = timeouts;
   this.fouls = fouls;
@@ -31,8 +31,8 @@ function Team(score, timeouts, fouls, players, teamName, league, church){
   this.church = church;
 }
 
-let teamA = new Team(180, 3,2,[player1, player2, player3, player4],"Upland 1","HS","UCC");
-let teamB = new Team(80,2,4,[player5, player6],"Upland 2","MS","Taylor Chapel");
+export let teamA = new Team(180, 3,2,[player1, player2, player3, player4],"Upland 1","HS","UCC");
+export let teamB = new Team(80,2,4,[player5, player6],"Upland 2","MS","Taylor Chapel");
 
 function setListA(players){
   let dropdown = document.getElementById("TeamAPlayers");
@@ -159,38 +159,5 @@ const TeamScoreboard = () => {
       currentQuizzer = selector.value
     }
   }
-
-  return (
-    <div>
-      <h2>{teamA.teamName} Score: {teamAScore}</h2>
-      <select onClick={() => teamA.players.forEach(setListA)} id= "TeamAPlayers"></select>
-      <button onClick={() => handleBonusButtonClick(teamA)}>+10</button>
-      <button onClick={() => handleIncorrectButtonClick(teamA)}>-10</button>
-      <button onClick={() => handleCorrectButtonClick(teamA)}>+20</button>
-      <button onClick={() => handleNeg20(teamA)}>-20</button>
-      <button onClick={() => handleFoulButtonClick(teamA)}>Foul</button>
-      <button onClick={() => handleTimeoutButtonClick(teamA)}>Timeout</button>
-      <p>Foul Count: {teamAFouls}  Timeouts Taken: {teamATimeouts}</p>
-      
-      <h2>{teamB.teamName} Score: {teamBScore}</h2>
-      <select onClick={() => teamB.players.forEach(setListB)} id= "TeamBPlayers"></select>
-      <button onClick={() => handleBonusButtonClick(teamB)}>+10</button>
-      <button onClick={() => handleIncorrectButtonClick(teamB)}>-10</button>
-      <button onClick={() => handleCorrectButtonClick(teamB)}>+20</button>
-      <button onClick={() => handleNeg20(teamB)}>-20</button>
-      <button onClick={() => handleFoulButtonClick(teamB)}>Foul</button>
-      <button onClick={() => handleTimeoutButtonClick(teamB)}>Timeout</button>
-      <p>Foul Count: {teamBFouls}  Timeouts Taken: {teamBTimeouts}</p>
-    </div>
-  );
-};
-
-const App = () => {
-  return (
-    <div>
-      <TeamScoreboard/>
-    </div>
-  );
-};
-
-export default App;
+}
+//export default App;
