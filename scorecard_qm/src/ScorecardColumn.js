@@ -11,6 +11,8 @@ export function ScorecardColumn() {
   const [teamBScore, setTeamBScore] = useState(S.teamB.score);
   const [teamBFouls, setTeamBFoulCount] = useState(S.teamB.fouls);
   const [teamBTimeouts, setTeamBTimeouts] = useState(S.teamB.timeouts);
+  let questionNumber = 1
+  let questionsByNumber = [];
 
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
@@ -55,6 +57,12 @@ export function ScorecardColumn() {
     } else {
       setTeamBScore(team.score);
     }
+    let foulBool = false
+    var selectorQ = document.getElementById("QuestionType");
+    //var newQuestion = new Question(questionNumber, team.name, currentQuizzer.name, val, selectorQ.value, foulBool);// need to figure out foul bool
+    //questionsByNumber[questionNumber] = newQuestion;
+    questionNumber++; //this should hopefully be incremented along with the visual changes
+    console.log(currentQuizzer)
     console.log(team.score)
   }
 
@@ -86,6 +94,27 @@ export function ScorecardColumn() {
       currentQuizzer = team.players.find((obj) => obj.name === selector.value)
     }
   }
+
+  function Question(questionNumber, teamName, player, points, type, foulBool){
+    this.questionNumber = questionNumber;
+    this.teamName = teamName;
+    this.player = player;
+    this.points = points;
+    this.type = type;
+    this.foulBool = foulBool;
+  }
+
+  function addQuestion(questionNumber, teamName, player, points, type, foulBool) {
+    var newQuestion = new Question(questionNumber, teamName, player, points, type, foulBool);
+    questionsByNumber[questionNumber] = newQuestion;
+    questionNumber++;
+  }
+  
+  function getQuestionType(){
+    var selectorQ = document.getElementById("QuestionType");
+    return selectorQ.value;
+  }
+
   return (
     <div className="table-container">
       <table id="select_cols">
