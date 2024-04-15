@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import "./App.css";
 import * as S from "./setup.js";
 import { setListA } from "./setup.js";
+import {ScoreCounter} from "./QuestionCounter.js";
+
+// export function updateScore(){
+//   S.ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
+//   //S.innerHTML = S.teamA.score
+//   //return S.teamA.score
+// }
 
 export function ScorecardColumn() {
   let currentQuizzer = S.teamA.players[0];
@@ -14,6 +21,7 @@ export function ScorecardColumn() {
   let questionNumber = 1
   let questionsByNumber = [];
 
+  
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
     if (team === S.teamA) {
@@ -38,13 +46,14 @@ export function ScorecardColumn() {
     updatePlayer(team)
     let val = document.getElementById("pointsDropdown").value;
     console.log(team.score)
+    console.log(currentQuizzer)
     if (val == "+10") {
       team.score += 10;
     } else if (val == "+20") {
       team.score += 20;
       currentQuizzer.personalScore += 20;
       currentQuizzer.correctAnswers += 1;
-      console.log(currentQuizzer)
+      //console.log(currentQuizzer)
     } else if (val == "-10") {
       //is there a rule for if the team gets so many answers wrong?
       team.score -= 10;
@@ -64,6 +73,7 @@ export function ScorecardColumn() {
     questionNumber++; //this should hopefully be incremented along with the visual changes
     console.log(currentQuizzer)
     console.log(team.score)
+    //ScoreCounter()
   }
 
   // Function to handle timeout button clicks

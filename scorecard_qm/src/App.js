@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import QuestionCounter from './QuestionCounter';
 import RowLabels from './ScorecardRowLabels';
